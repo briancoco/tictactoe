@@ -1,0 +1,17 @@
+body {
+    background: rgb(25, 24, 24);
+}
+
+.board {
+    display: grid;
+    background: white;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    margin-top: 200px;
+    grid-template-columns: repeat(3, 1fr)
+}
+
+.box {
+    border: 1px solid black
+}
