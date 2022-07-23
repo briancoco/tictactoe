@@ -21,3 +21,16 @@ body {
     font-size: 80px;
     font-weight: bold;
 }
+
+.players {
+    background:pink;
+    height: 350px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 20px;
+    position: absolute;
+    left: 37%;
+}
