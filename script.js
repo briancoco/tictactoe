@@ -5,5 +5,7 @@ for(let i = 0; i < 9; i++) {
     div.classList.add(`b${i}`)
     div.classList.add('box')
     board.appendChild(div)
-    div.addEventListener('click', () => console.log(i))
+    div.addEventListener('click', () => {
+        div.textContent = "X";
+    });
 }
