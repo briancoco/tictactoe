@@ -4,7 +4,7 @@ let gameData = {
     player2: '',
     currentPlayer: '',
 };
-
+const turn = document.querySelector('.turn');
 const body = document.querySelector('body');
 const players = document.querySelector('.players');
 //body.removeChild(players);
@@ -14,6 +14,7 @@ confirm.addEventListener('click', () => {
     gameData.player1 = document.querySelector('.player1').value;
     gameData.player2 = document.querySelector('.player2').value;
     gameData.currentPlayer = gameData.player1;
+    turn.textContent = `${gameData.currentPlayer}'s turn`;
     body.removeChild(players);
     
 });
@@ -30,14 +31,14 @@ for(let i = 0; i < 9; i++) {
             gameData.board[i] = "X";
             winner('X')
             gameData.currentPlayer = gameData.player2;
-            
+            turn.textContent = `${gameData.currentPlayer}'s turn`;
         }
         else {
             div.textContent = 'O';
             gameData.board[i] = "O";
             winner('O');
             gameData.currentPlayer = gameData.player1;
-    
+            turn.textContent = `${gameData.currentPlayer}'s turn`;
         }
 
     });
@@ -68,6 +69,7 @@ function winner(playerSymbol) {
                     //console.log(div);
                     if (i === combo[0] || i === combo[1] || i === combo[2]) {
                         div.classList.add('winner');
+                        turn.textContent = `${gameData.currentPlayer} wins!`;
                     }
                 }
             }
