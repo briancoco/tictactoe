@@ -29,16 +29,26 @@ for(let i = 0; i < 9; i++) {
         if(gameData.currentPlayer == gameData.player1) {
             div.textContent = 'X';
             gameData.board[i] = "X";
-            winner('X')
-            gameData.currentPlayer = gameData.player2;
-            turn.textContent = `${gameData.currentPlayer}'s turn`;
+            //gameData.currentPlayer = gameData.player2;
+            //turn.textContent = `${gameData.currentPlayer}'s turn`;
+            if(!winner('X')) {
+                gameData.currentPlayer = gameData.player2;
+                turn.textContent = `${gameData.currentPlayer}'s turn`;
+            }
+            else {
+                gameData.currentPlayer = '';
+            }
         }
-        else {
+        else if(gameData.currentPlayer == gameData.player2) {
             div.textContent = 'O';
             gameData.board[i] = "O";
-            winner('O');
-            gameData.currentPlayer = gameData.player1;
-            turn.textContent = `${gameData.currentPlayer}'s turn`;
+            if(!winner('O')) {
+                gameData.currentPlayer = gameData.player1;
+                turn.textContent = `${gameData.currentPlayer}'s turn`;
+            }
+            else {
+                gameData.currentPlayer = '';
+            }
         }
 
     });
@@ -52,6 +62,7 @@ function updateBoard() {
 }
 
 function winner(playerSymbol) {
+    let win = false;
     const winCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -62,16 +73,20 @@ function winner(playerSymbol) {
         [0, 4, 8],
         [2, 4, 6]
         ];
-        winCombos.forEach((combo, index) => {
-            if(gameData.board[combo[0]] == playerSymbol && gameData.board[combo[1]] == playerSymbol && gameData.board[combo[2]] == playerSymbol) {
-                for(let i = 0; i < 9; i++) {
-                    const div = document.querySelector(`.b${i}`);
-                    //console.log(div);
-                    if (i === combo[0] || i === combo[1] || i === combo[2]) {
-                        div.classList.add('winner');
-                        turn.textContent = `${gameData.currentPlayer} wins!`;
-                    }
+    winCombos.forEach((combo, index) => {
+        if(gameData.board[combo[0]] == playerSymbol && gameData.board[combo[1]] == playerSymbol && gameData.board[combo[2]] == playerSymbol) {
+            for(let i = 0; i < 9; i++) {
+                const div = document.querySelector(`.b${i}`);
+                //console.log(div);
+                if (i === combo[0] || i === combo[1] || i === combo[2]) {
+                    div.classList.add('winner');
+                    turn.textContent = `${gameData.currentPlayer} wins!`;
+                    
                 }
             }
-        });
+            win = true;
+        }
+
+    });
+    return win;
 }
