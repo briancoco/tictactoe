@@ -29,37 +29,35 @@ for(let i = 0; i < 9; i++) {
         if(gameData.currentPlayer == gameData.player1) {
             div.textContent = 'X';
             gameData.board[i] = "X";
-            //gameData.currentPlayer = gameData.player2;
-            //turn.textContent = `${gameData.currentPlayer}'s turn`;
-            if(!winner('X')) {
+            if(!winner('X') && boardNotFull(gameData.board)) {
                 gameData.currentPlayer = gameData.player2;
                 turn.textContent = `${gameData.currentPlayer}'s turn`;
             }
             else {
                 gameData.currentPlayer = '';
+                if(!boardNotFull(gameData.board)) {
+                    turn.textContent = 'Tie!';
+                }
             }
         }
         else if(gameData.currentPlayer == gameData.player2) {
             div.textContent = 'O';
             gameData.board[i] = "O";
-            if(!winner('O')) {
+            if(!winner('O') && boardNotFull(gameData.board)) {
                 gameData.currentPlayer = gameData.player1;
                 turn.textContent = `${gameData.currentPlayer}'s turn`;
             }
             else {
                 gameData.currentPlayer = '';
+                if(!boardNotFull(gameData.board)) {
+                    turn.textContent = 'Tie!';
+                }
             }
         }
 
     });
 }
 
-function updateBoard() {
-    for(let i = 0; i < 9; i++) {
-        const div = document.querySelector(`b${i}`);
-        div.textContent = gameData.board[i];
-    }
-}
 
 function winner(playerSymbol) {
     let win = false;
@@ -89,4 +87,12 @@ function winner(playerSymbol) {
 
     });
     return win;
+}
+
+function boardNotFull(board) {
+    let notFull = board.includes(undefined);
+    if(notFull) {
+        return true;
+    }
+    return false;
 }
